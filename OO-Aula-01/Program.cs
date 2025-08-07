@@ -24,6 +24,7 @@ internal class Program
         Console.WriteLine($"Nome: {cachorro2.Nome}, Idade: {cachorro2.Idade}, Espécie: {cachorro2.Especie}, Raça: {cachorro2.Raca}, Tipo de Alimentação: {cachorro2.TipoAlimentacao}");
 
 
+
         Personagem personagem = new Personagem
         {
             Nome = "Peralta",
