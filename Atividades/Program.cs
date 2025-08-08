@@ -96,10 +96,10 @@
             Console.WriteLine(pessoa);
         }
 
-        fila.Enqueue("Carla");
+        fila.Enqueue("Ray");
         Console.WriteLine("\n");
 
-        bool encontrou = fila.Contains("Ana");
+        bool encontrou = fila.Contains("Anna");
 
         if (encontrou)
         {
