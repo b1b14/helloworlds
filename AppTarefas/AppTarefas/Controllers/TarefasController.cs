@@ -25,7 +25,7 @@ namespace AppTarefas.Controllers
 
         public IActionResult Create(Tarefa tarefa)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 tarefa.TarefaId = _proximoId++; // atribui o id da tarefa
                 _tarefas.Add(tarefa); // adiciona a tarefa na lista
@@ -33,6 +33,57 @@ namespace AppTarefas.Controllers
             }
             return View(tarefa);// se o modelo não for válido, retorna a view com os dados preenchidos
         }
+        public IActionResult Edit(int id)
+        {
+            var tarefa = _tarefas.FirstOrDefault(t => t.TarefaId == id);
+            return View(tarefa);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(int id, Tarefa tarefaAtualizada)
+        {
+            var tarefa = _tarefas.FirstOrDefault(t => t.TarefaId == id);
+
+            tarefa.Titulo = tarefaAtualizada.Titulo;
+            tarefa.Descricao = tarefaAtualizada.Descricao;
+            tarefa.Concluida = tarefaAtualizada.Concluida;
+
+            return RedirectToAction("Index");
+
+
+
+        }
+        public IActionResult Details(int id)
+        {
+            var tarefa = _tarefas.FirstOrDefault(t => t.TarefaId == id);
+            return View(tarefa);
+
+
+
+
+        }
+        public IActionResult Delete(int id)
+        {
+            var tarefa = _tarefas.FirstOrDefault(t => t.TarefaId == id);
+            return View(tarefa);
+
+
+
+
+        }
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+
+        public IActionResult DeleteConfirmed(int id)
+        {
+            var tarefa = _tarefas.FirstOrDefault(t => t.TarefaId == id);
+            if (tarefa != null)
+            {
+                _tarefas.Remove(tarefa); // remove a tarefa da lista
+            }
+            return RedirectToAction(nameof(Index)); // redireciona para a ação Index
+        }
 
     }
+
 }
