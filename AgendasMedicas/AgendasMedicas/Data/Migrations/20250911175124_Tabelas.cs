@@ -81,7 +81,7 @@ namespace AgendasMedicas.Data.Migrations
                     AgendaId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     PacienteId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     MedicoId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    DataConsuta = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DataConsulta = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Status = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>

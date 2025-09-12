@@ -8,7 +8,7 @@
 
         public Guid MedicoId { get; set; }
         public Medico? Medico { get; set; }
-        public DateTime? DataConsuta { get; set; }
+        public DateTime? DataConsulta { get; set; }
         public string? Status { get; set; }
     }
 }
