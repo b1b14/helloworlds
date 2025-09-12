@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AgendasMedicas.Data;
 using AgendasMedicas.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AgendasMedicas.Controllers
 {
+    [Authorize]
     public class AgendasController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -49,8 +51,8 @@ namespace AgendasMedicas.Controllers
         // GET: Agendas/Create
         public IActionResult Create()
         {
-            ViewData["MedicoId"] = new SelectList(_context.Medicos, "MedicoId", "MedicoId");
-            ViewData["PacienteId"] = new SelectList(_context.Pacientes, "PacienteId", "PacienteId");
+            ViewData["MedicoId"] = new SelectList(_context.Medicos, "MedicoId", "Nome");
+            ViewData["PacienteId"] = new SelectList(_context.Pacientes, "PacienteId", "Nome");
             return View();
         }
 
@@ -68,8 +70,8 @@ namespace AgendasMedicas.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["MedicoId"] = new SelectList(_context.Medicos, "MedicoId", "MedicoId", agenda.MedicoId);
-            ViewData["PacienteId"] = new SelectList(_context.Pacientes, "PacienteId", "PacienteId", agenda.PacienteId);
+            ViewData["MedicoId"] = new SelectList(_context.Medicos, "MedicoId", "Nome", agenda.MedicoId);
+            ViewData["PacienteId"] = new SelectList(_context.Pacientes, "PacienteId", "Nome", agenda.PacienteId);
             return View(agenda);
         }
 
@@ -86,8 +88,8 @@ namespace AgendasMedicas.Controllers
             {
                 return NotFound();
             }
-            ViewData["MedicoId"] = new SelectList(_context.Medicos, "MedicoId", "MedicoId", agenda.MedicoId);
-            ViewData["PacienteId"] = new SelectList(_context.Pacientes, "PacienteId", "PacienteId", agenda.PacienteId);
+            ViewData["MedicoId"] = new SelectList(_context.Medicos, "MedicoId", "Nome", agenda.MedicoId);
+            ViewData["PacienteId"] = new SelectList(_context.Pacientes, "PacienteId", "Nome", agenda.PacienteId);
             return View(agenda);
         }
 
@@ -123,8 +125,8 @@ namespace AgendasMedicas.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["MedicoId"] = new SelectList(_context.Medicos, "MedicoId", "MedicoId", agenda.MedicoId);
-            ViewData["PacienteId"] = new SelectList(_context.Pacientes, "PacienteId", "PacienteId", agenda.PacienteId);
+            ViewData["MedicoId"] = new SelectList(_context.Medicos, "MedicoId", "Nome", agenda.MedicoId);
+            ViewData["PacienteId"] = new SelectList(_context.Pacientes, "PacienteId", "Nome", agenda.PacienteId);
             return View(agenda);
         }
 

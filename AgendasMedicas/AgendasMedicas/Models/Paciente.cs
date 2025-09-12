@@ -23,9 +23,6 @@ namespace AgendasMedicas.Models
         public string Email { get; set; }
 
 
-        public string? UseId { get; set; }
-        public IdentityUser? IdentitityUser { get; set; }
-
 
 
 

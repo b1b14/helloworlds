@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AgendasMedicas.Data;
 using AgendasMedicas.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AgendasMedicas.Controllers
 {
+    [Authorize]
     public class PacientesController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -54,7 +56,7 @@ namespace AgendasMedicas.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PacienteId,Nome,CPF,Celular,Telefone,DataNascimento,Endereco,Bairro,Cidade,UF,CEP,Prontuario,Email,UseId")] Paciente paciente)
+        public async Task<IActionResult> Create([Bind("PacienteId,Nome,CPF,Celular,Telefone,DataNascimento,Endereco,Bairro,Cidade,UF,CEP,Prontuario,Email")] Paciente paciente)
         {
             if (ModelState.IsValid)
             {
@@ -87,7 +89,7 @@ namespace AgendasMedicas.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("PacienteId,Nome,CPF,Celular,Telefone,DataNascimento,Endereco,Bairro,Cidade,UF,CEP,Prontuario,Email,UseId")] Paciente paciente)
+        public async Task<IActionResult> Edit(Guid id, [Bind("PacienteId,Nome,CPF,Celular,Telefone,DataNascimento,Endereco,Bairro,Cidade,UF,CEP,Prontuario,Email")] Paciente paciente)
         {
             if (id != paciente.PacienteId)
             {
