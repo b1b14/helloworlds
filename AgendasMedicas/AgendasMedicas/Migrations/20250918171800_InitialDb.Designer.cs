@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace AgendasMedicas.Data.Migrations
+namespace AgendasMedicas.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250911175124_Tabelas")]
-    partial class Tabelas
+    [Migration("20250918171800_InitialDb")]
+    partial class InitialDb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -31,7 +31,7 @@ namespace AgendasMedicas.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime?>("DataConsuta")
+                    b.Property<DateTime?>("DataConsulta")
                         .HasColumnType("datetime2");
 
                     b.Property<Guid>("MedicoId")
@@ -132,9 +132,6 @@ namespace AgendasMedicas.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("IdentitityUserId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -149,12 +146,7 @@ namespace AgendasMedicas.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UseId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("PacienteId");
-
-                    b.HasIndex("IdentitityUserId");
 
                     b.ToTable("Pacientes", (string)null);
                 });
@@ -389,15 +381,6 @@ namespace AgendasMedicas.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Especialidade");
-                });
-
-            modelBuilder.Entity("AgendasMedicas.Models.Paciente", b =>
-                {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "IdentitityUser")
-                        .WithMany()
-                        .HasForeignKey("IdentitityUserId");
-
-                    b.Navigation("IdentitityUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
