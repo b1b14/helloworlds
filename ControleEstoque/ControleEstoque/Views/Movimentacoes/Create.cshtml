@@ -2,11 +2,21 @@
 
 @{
 	ViewData["Title"] = "Entras e saídas de Produtos";
+	ViewData["NomeUsuario"] = "Bibia";
+	var alerta = ViewBag["Alerta"] as string;
+}
+
+@if (!String.IsNullOrEmpty(alerta))
+{
+	
+		<div class="alert alert-warning" role="alert">
+			@alerta
+		</div>
 }
 
 
-
 <h4>@ViewData["Title"]</h4>
+@* <h5>@ViewData["NomeUsuario"]</h5> *@
 
 <div class="container">
 	<div class="row">
@@ -15,7 +25,7 @@
 				<div asp-validation-summary="ModelOnly" class="text-danger"></div>
 				<div class="form-group">
 					<label asp-for="ProdutoId" class="control-label"></label>
-					<select asp-for="ProdutoId" class="form-control" asp-items="ViewBag.ProdutoId"></select>
+					<select asp-for="ProdutoId" class="form-control" asp-items="ViewBag.ProdutoId"><option>Selecione...</option></select>
 				</div>
 				<div class="form-group">
 					<label asp-for="Quantidade" class="control-label"></label>
