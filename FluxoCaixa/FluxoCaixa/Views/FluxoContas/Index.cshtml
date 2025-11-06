@@ -1,0 +1,53 @@
+﻿@model IEnumerable<FluxoCaixa.Models.FluxoConta>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DataMovimentacao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ContaId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ContaFinanceiraId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UsuarioId)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataMovimentacao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ContaId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ContaFinanceiraId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UsuarioId)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.FluxoContaId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.FluxoContaId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.FluxoContaId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
