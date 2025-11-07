@@ -14,5 +14,6 @@ namespace FluxoCaixa.Data
         public DbSet<ContaFinanceira> ContasFinanceiras { get; set; }
         public DbSet<FluxoCaixa.Models.Conta> Conta { get; set; } = default!;
         public DbSet<FluxoCaixa.Models.FluxoConta> FluxoConta { get; set; } = default!;
+        public DbSet<FluxoCaixa.Models.TipoConta> TipoConta { get; set; } = default!;
     }
 }

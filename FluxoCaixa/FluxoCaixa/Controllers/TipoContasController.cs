@@ -10,22 +10,22 @@ using FluxoCaixa.Models;
 
 namespace FluxoCaixa.Controllers
 {
-    public class FluxoContasController : Controller
+    public class TipoContasController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public FluxoContasController(ApplicationDbContext context)
+        public TipoContasController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: FluxoContas
+        // GET: TipoContas
         public async Task<IActionResult> Index()
         {
-            return View(await _context.FluxoConta.ToListAsync());
+            return View(await _context.TipoConta.ToListAsync());
         }
 
-        // GET: FluxoContas/Details/5
+        // GET: TipoContas/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,39 +33,39 @@ namespace FluxoCaixa.Controllers
                 return NotFound();
             }
 
-            var fluxoConta = await _context.FluxoConta
-                .FirstOrDefaultAsync(m => m.FluxoContaId == id);
-            if (fluxoConta == null)
+            var tipoConta = await _context.TipoConta
+                .FirstOrDefaultAsync(m => m.TipoContaId == id);
+            if (tipoConta == null)
             {
                 return NotFound();
             }
 
-            return View(fluxoConta);
+            return View(tipoConta);
         }
 
-        // GET: FluxoContas/Create
+        // GET: TipoContas/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: FluxoContas/Create
+        // POST: TipoContas/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("FluxoContaId,DataMovimentacao,ContaId,ContaFinanceiraId,UsuarioId")] FluxoConta fluxoConta)
+        public async Task<IActionResult> Create([Bind("TipoContaId,Nome,Descricao")] TipoConta tipoConta)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(fluxoConta);
+                _context.Add(tipoConta);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(fluxoConta);
+            return View(tipoConta);
         }
 
-        // GET: FluxoContas/Edit/5
+        // GET: TipoContas/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,22 +73,22 @@ namespace FluxoCaixa.Controllers
                 return NotFound();
             }
 
-            var fluxoConta = await _context.FluxoConta.FindAsync(id);
-            if (fluxoConta == null)
+            var tipoConta = await _context.TipoConta.FindAsync(id);
+            if (tipoConta == null)
             {
                 return NotFound();
             }
-            return View(fluxoConta);
+            return View(tipoConta);
         }
 
-        // POST: FluxoContas/Edit/5
+        // POST: TipoContas/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("FluxoContaId,DataMovimentacao,ContaId,ContaFinanceiraId,UsuarioId")] FluxoConta fluxoConta)
+        public async Task<IActionResult> Edit(int id, [Bind("TipoContaId,Nome,Descricao")] TipoConta tipoConta)
         {
-            if (id != fluxoConta.FluxoContaId)
+            if (id != tipoConta.TipoContaId)
             {
                 return NotFound();
             }
@@ -97,15 +97,12 @@ namespace FluxoCaixa.Controllers
             {
                 try
                 {
-                    // definir o status (pago ou não)
-                    fluxoConta.StatusPagamento = "Pago";
-
-                    _context.Update(fluxoConta);
+                    _context.Update(tipoConta);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!FluxoContaExists(fluxoConta.FluxoContaId))
+                    if (!TipoContaExists(tipoConta.TipoContaId))
                     {
                         return NotFound();
                     }
@@ -116,10 +113,10 @@ namespace FluxoCaixa.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(fluxoConta);
+            return View(tipoConta);
         }
 
-        // GET: FluxoContas/Delete/5
+        // GET: TipoContas/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -127,34 +124,34 @@ namespace FluxoCaixa.Controllers
                 return NotFound();
             }
 
-            var fluxoConta = await _context.FluxoConta
-                .FirstOrDefaultAsync(m => m.FluxoContaId == id);
-            if (fluxoConta == null)
+            var tipoConta = await _context.TipoConta
+                .FirstOrDefaultAsync(m => m.TipoContaId == id);
+            if (tipoConta == null)
             {
                 return NotFound();
             }
 
-            return View(fluxoConta);
+            return View(tipoConta);
         }
 
-        // POST: FluxoContas/Delete/5
+        // POST: TipoContas/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var fluxoConta = await _context.FluxoConta.FindAsync(id);
-            if (fluxoConta != null)
+            var tipoConta = await _context.TipoConta.FindAsync(id);
+            if (tipoConta != null)
             {
-                _context.FluxoConta.Remove(fluxoConta);
+                _context.TipoConta.Remove(tipoConta);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool FluxoContaExists(int id)
+        private bool TipoContaExists(int id)
         {
-            return _context.FluxoConta.Any(e => e.FluxoContaId == id);
+            return _context.TipoConta.Any(e => e.TipoContaId == id);
         }
     }
 }
